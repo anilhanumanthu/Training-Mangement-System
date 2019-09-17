@@ -1,0 +1,37 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="AdminMasterPage.master.cs" Inherits="AdminMasterPage" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
+    <style>
+        .Logouter{
+            font-size:25px;
+            font-weight:bold;
+            border-radius:15px;
+            border:2px solid aqua;
+            text-decoration:none;
+            margin-right:5%;
+            margin-top:0.5%;
+            padding:15px;
+            color:cornflowerblue;
+            background-color:white;
+            float:right;
+            text-shadow:1px 2px aqua;
+        }
+    </style>
+    <asp:ContentPlaceHolder id="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <asp:LinkButton OnClick="LogOut_Click" CssClass="Logouter" ID="Logouter" runat="server">Logout</asp:LinkButton>
+    <div>
+        <asp:ContentPlaceHolder id="ContentPlaceHolder1" runat="server">
+        
+        </asp:ContentPlaceHolder>
+    </div>
+    </form>
+</body>
+</html>

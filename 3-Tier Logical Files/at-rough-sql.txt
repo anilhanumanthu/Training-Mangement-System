@@ -1,0 +1,92 @@
+create procedure QuestionTableCreator
+@courseID varchar(15)
+as
+select * from QuestionBank
+where CourseID = @courseID
+order by Qno asc
+
+select * from QuestionBank
+
+create procedure updateAnswered
+@qno int,
+@answered varchar(2),
+@coursecode varchar(15)
+as
+update QuestionBank
+set Ansgiven = @answered where @qno = Qno and CourseID = @coursecode
+
+
+alter procedure scorecard @courseid = 'c'
+@courseid varchar(15)
+as
+select count(*) from QuestionBank where Ans = Ansgiven and CourseID = @courseid
+
+
+create procedure onregistrationcourse
+@id varchar(15),
+@course varchar(15),
+@register varchar(15),
+@courseopen varchar(15)
+as
+insert into Qualifier values(@id,@course,@register,@courseopen)
+
+create procedure onupdateQuantifier
+@id varchar(15),
+@course varchar(15)
+as
+update Qualifier
+set CourseOpened = 'Y' where UserID= @id and CourseCode = @course
+
+
+create procedure iscourseopened
+@id varchar(15),
+@courseid varchar(15)
+as
+select CourseOpened from Qualifier where UserID=@id and CourseCode=@courseid
+
+alter procedure isregistered
+@id varchar(15),
+@courseid varchar(15)
+as
+select count(*) from Qualifier where UserID=@id and CourseCode=@courseid
+
+
+create procedure activateStatus
+@id varchar(15),
+@coursecode varchar(15),
+@completiondate varchar(15),
+@score int,
+@status varchar(15)
+as
+insert into Scores values(@id,@coursecode,@completiondate,@score,@status);
+
+
+
+create procedure updateStatus
+@id varchar(15),
+@coursecode varchar(15),
+@completiondate varchar(15),
+@score int,
+@status varchar(15)
+as
+update Scores
+set CompletionDate = @completiondate,Score=@score,Status=@status where UserID = @id and CourseCode = @coursecode
+
+
+
+
+
+select * from Scores
+delete from Qualifier where CourseCode = 'Java'
+
+
+create procedure UserIDSearcher
+@id varchar(15)
+as
+select [UserID], [CourseCode],[Status] from Scores where UserID = @id
+
+create procedure getScoreDetails
+@id varchar(15),
+@coursecode varchar(15)
+as
+select * from Scores where CourseCode = @coursecode and UserID = @id
